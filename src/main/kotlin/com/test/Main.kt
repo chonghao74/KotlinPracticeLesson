@@ -1,7 +1,8 @@
 import com.google.gson.Gson
 import com.test.Inheritancetest.NewPersonWallet
 import com.test.Person
-import com.test.dto.Candy
+import com.designpattern.SingletonTestJava
+import com.test.designpattern.SingletonTest
 import com.test.dto.MyHttpResponse
 import com.test.enumdata.Gender
 import com.test.enumdata.Sugar
@@ -13,9 +14,13 @@ import com.test.interfaces.Fruit
 import com.test.extension.getSugar
 import com.test.extension.setSugar
 import com.test.gettersettertest.Bird
+import com.test.objectexpression.Generator
 import com.test.sealeddata.Counter1
 import com.test.sealeddata.Counter2
 import com.test.sealeddata.TimReturnCode
+import java.awt.SystemColor.window
+import java.awt.event.MouseAdapter
+import java.awt.event.MouseEvent
 import java.math.BigDecimal
 import java.time.LocalDateTime
 
@@ -43,8 +48,11 @@ fun main(args: Array<String>) {
     //testKeywordBy();
     //testScopeFunction();
 
-    //Singleton
-    testSingletonObject();
+    //Object Singleton
+    //testSingletonObject();
+
+    //Design Pattern
+    testSingletonPattern();
 
 }
 
@@ -484,4 +492,31 @@ class TestScope(val input:Int){
 private fun testSingletonObject(){
     println(ProfileName.name)
     println(ProfileName.showAddName("Yu"))
+
+}
+
+private fun testObjectExpression(){
+   var makeMouseAdapter = object : MouseAdapter() {
+        override fun mouseClicked(e: MouseEvent) { /*do something*/ }
+        override fun mouseEntered(e: MouseEvent) { /*do something*/ }
+    }
+
+    Generator().printGeneratorNo(10);
+}
+
+//測試 Design Pattern Singleton
+private fun testSingletonPattern(){
+    var s1Java = SingletonTestJava.getInstance();
+    var s2Java = SingletonTestJava.getInstance();
+
+    var s1 = SingletonTest.getInstance();
+    var s2 = SingletonTest.getInstance();
+
+    println("s1Java -> ${s1Java.showAddCount()}");
+    println("s2Java -> ${s2Java.showAddCount()}");
+    println("s2Java == s1Java -> ${s2Java == s1Java}");
+
+    println("s1 -> ${s1.showAddCount()}");
+    println("s2 -> ${s2.showAddCount()}");
+    println("s2 == s1 -> ${s2 == s1}");
 }
