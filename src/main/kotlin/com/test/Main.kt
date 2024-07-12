@@ -1,8 +1,16 @@
+import com.designpattern.factory.AppleCakeJava
+import com.designpattern.factory.BlueberryCakeJava
+import com.designpattern.factory.CakeMakeFactoryJava
+import com.designpattern.factory.FruitCakeJava
 import com.google.gson.Gson
 import com.test.Inheritancetest.NewPersonWallet
 import com.test.Person
-import com.designpattern.SingletonTestJava
-import com.test.designpattern.SingletonTest
+import com.designpattern.singleton.SingletonTestJava
+import com.test.designpattern.factory.AppleCake
+import com.test.designpattern.factory.BlueberryCake
+import com.test.designpattern.factory.CakeMakeFactory
+import com.test.designpattern.factory.FruitCake
+import com.test.designpattern.singleton.SingletonTest
 import com.test.dto.MyHttpResponse
 import com.test.enumdata.Gender
 import com.test.enumdata.Sugar
@@ -18,11 +26,11 @@ import com.test.objectexpression.Generator
 import com.test.sealeddata.Counter1
 import com.test.sealeddata.Counter2
 import com.test.sealeddata.TimReturnCode
-import java.awt.SystemColor.window
 import java.awt.event.MouseAdapter
 import java.awt.event.MouseEvent
 import java.math.BigDecimal
 import java.time.LocalDateTime
+import java.util.Scanner
 
 fun main(args: Array<String>) {
     //testBasic()
@@ -48,11 +56,14 @@ fun main(args: Array<String>) {
     //testKeywordBy();
     //testScopeFunction();
 
-    //Object Singleton
+    //Object
     //testSingletonObject();
+    //testObjectExpression();
+
 
     //Design Pattern
-    testSingletonPattern();
+    //testSingletonPattern();
+    testFactoryPattern();
 
 }
 
@@ -488,13 +499,13 @@ class TestScope(val input:Int){
     }
 }
 
-//測試 Singleton
+//測試 object Singleton
 private fun testSingletonObject(){
     println(ProfileName.name)
     println(ProfileName.showAddName("Yu"))
-
 }
 
+//測試 Object Expression
 private fun testObjectExpression(){
    var makeMouseAdapter = object : MouseAdapter() {
         override fun mouseClicked(e: MouseEvent) { /*do something*/ }
@@ -504,7 +515,8 @@ private fun testObjectExpression(){
     Generator().printGeneratorNo(10);
 }
 
-//測試 Design Pattern Singleton
+//測試 Design Pattern
+// Singleton
 private fun testSingletonPattern(){
     var s1Java = SingletonTestJava.getInstance();
     var s2Java = SingletonTestJava.getInstance();
@@ -519,4 +531,47 @@ private fun testSingletonPattern(){
     println("s1 -> ${s1.showAddCount()}");
     println("s2 -> ${s2.showAddCount()}");
     println("s2 == s1 -> ${s2 == s1}");
+}
+
+//Factory
+private fun testFactoryPattern(){
+    val scanner = Scanner( System.`in`);
+    val data = scanner.nextLine();
+    scanner.close();
+    //Java Non Use Factory
+    val cakeDataJavaNonUseFactory = when(data){
+        "1" ->{
+            AppleCakeJava()
+        }
+        "2" ->{
+            BlueberryCakeJava()
+        }
+        else->{
+            FruitCakeJava()
+        }
+    }
+
+    cakeDataJavaNonUseFactory.aboutCake();
+
+    //Kotlin Non Use Factory
+    val cakeDataNonUseFactory = when(data){
+        "1" ->{
+            AppleCake()
+        }
+        "2" ->{
+            BlueberryCake()
+        }
+        else->{
+            FruitCake()
+        }
+    }
+
+    cakeDataNonUseFactory.aboutCake()
+
+    val cakeDataUsedFactoryJava = CakeMakeFactoryJava().createCake(data);
+    cakeDataUsedFactoryJava?.aboutCake()
+
+    val cakeDataUsedFactory = CakeMakeFactory().createCake(data);
+    cakeDataUsedFactory?.aboutCake()
+
 }

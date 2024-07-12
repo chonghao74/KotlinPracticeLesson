@@ -1,4 +1,4 @@
-package com.test.designpattern
+package com.test.designpattern.singleton
 
 class SingletonTestMultiThread {
     private var countData = 0;
@@ -8,10 +8,10 @@ class SingletonTestMultiThread {
     }
 
     companion object{
-        private var uniqueObject:SingletonTestMultiThread? = null
+        private var uniqueObject: SingletonTestMultiThread? = null
 
-        fun getInstance():SingletonTestMultiThread{
-            if(uniqueObject==null){
+        fun getInstance(): SingletonTestMultiThread {
+            if(uniqueObject ==null){
                 synchronized(SingletonTestMultiThread::class.java){
                     uniqueObject = SingletonTestMultiThread()
                 }

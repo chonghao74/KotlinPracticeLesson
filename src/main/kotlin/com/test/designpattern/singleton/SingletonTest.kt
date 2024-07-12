@@ -1,4 +1,4 @@
-package com.test.designpattern
+package com.test.designpattern.singleton
 
 class SingletonTest {
 
@@ -9,10 +9,10 @@ class SingletonTest {
     }
 
     companion object{
-        private var uniqueObject:SingletonTest? = null
+        private var uniqueObject: SingletonTest? = null
 
-        fun getInstance():SingletonTest{
-            if(uniqueObject==null){
+        fun getInstance(): SingletonTest {
+            if(uniqueObject ==null){
                 uniqueObject = SingletonTest()
             }
             return uniqueObject as SingletonTest

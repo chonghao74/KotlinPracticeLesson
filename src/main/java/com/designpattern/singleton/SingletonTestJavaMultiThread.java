@@ -1,4 +1,4 @@
-package com.designpattern;
+package com.designpattern.singleton;
 public class SingletonTestJavaMultiThread {
     private static SingletonTestJavaMultiThread uniqueObject = null;
     public SingletonTestJavaMultiThread(){
